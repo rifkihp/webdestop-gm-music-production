@@ -1,0 +1,440 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="penjualan" language="groovy" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="1bde1afa-301e-4557-a2b1-b6e2a95055c2">
+	<property name="ireport.zoom" value="1.1289478601075547"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="PATH" class="java.lang.String"/>
+	<parameter name="LABEL_PERIODE" class="java.lang.String"/>
+	<parameter name="NOMER" class="java.lang.String"/>
+	<parameter name="TANGGAL" class="java.lang.String"/>
+	<parameter name="KODE_MITRA" class="java.lang.String"/>
+	<parameter name="AWAL" class="java.lang.String"/>
+	<parameter name="AKHIR" class="java.lang.String"/>
+	<queryString>
+		<![CDATA[CALL detail_trx_mitra($P{KODE_MITRA}, $P{AWAL}, $P{AKHIR});]]>
+	</queryString>
+	<field name="PERIODE_AWAL" class="java.lang.String"/>
+	<field name="PERIODE_AKHIR" class="java.lang.String"/>
+	<field name="no" class="java.lang.Long">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="provider" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="kode_mitra" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="kode" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="judul" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="penyanyi" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="nama" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="mitra_shared" class="java.math.BigDecimal"/>
+	<field name="total" class="java.lang.Integer">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="pendapatan" class="java.lang.Double"/>
+	<field name="pendapatan_shared" class="java.lang.Double"/>
+	<field name="pendapatan_total" class="java.lang.Double"/>
+	<field name="pendapatan_total_shared" class="java.lang.Double"/>
+	<field name="terbilang" class="java.lang.String"/>
+	<variable name="SUB_PENDAPATAN" class="java.lang.Double" resetType="Group" resetGroup="PROVIDER" calculation="Sum">
+		<variableExpression><![CDATA[$F{pendapatan}]]></variableExpression>
+	</variable>
+	<variable name="SUB_PENDAPATAN_SHARED" class="java.lang.Double" resetType="Group" resetGroup="PROVIDER" calculation="Sum">
+		<variableExpression><![CDATA[$F{pendapatan_shared}]]></variableExpression>
+	</variable>
+	<group name="HEADER" isStartNewPage="true">
+		<groupExpression><![CDATA[$F{kode_mitra}]]></groupExpression>
+		<groupHeader>
+			<band height="164">
+				<textField>
+					<reportElement x="0" y="144" width="33" height="20" uuid="e688d340-c65a-42b0-b431-29340c0e021f"/>
+					<box>
+						<topPen lineWidth="1.0"/>
+						<leftPen lineWidth="1.0"/>
+						<bottomPen lineWidth="1.0"/>
+						<rightPen lineWidth="1.0"/>
+					</box>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font isBold="false"/>
+					</textElement>
+					<textFieldExpression><![CDATA["No."]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement x="485" y="144" width="70" height="20" uuid="484e10b1-715c-41d4-80cc-1687866a4ea8"/>
+					<box rightPadding="5">
+						<topPen lineWidth="1.0"/>
+						<bottomPen lineWidth="1.0"/>
+						<rightPen lineWidth="1.0"/>
+					</box>
+					<textElement textAlignment="Right" verticalAlignment="Middle">
+						<font isBold="false"/>
+					</textElement>
+					<textFieldExpression><![CDATA["JUMLAH"]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement x="33" y="144" width="76" height="20" uuid="8df2c541-4538-48ea-b65e-98e02b7eba49"/>
+					<box>
+						<topPen lineWidth="1.0"/>
+						<bottomPen lineWidth="1.0"/>
+						<rightPen lineWidth="1.0"/>
+					</box>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font isBold="false"/>
+					</textElement>
+					<textFieldExpression><![CDATA["KODE"]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement x="0" y="75" width="555" height="15" uuid="8416989a-105d-43d7-b422-290e75041ab7"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font isBold="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA["PERIODE " + $F{PERIODE_AWAL} + " S.D " + $F{PERIODE_AKHIR}]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement x="0" y="1" width="70" height="55" uuid="01f9224e-f4f5-4b28-8a56-3e1f01814f37"/>
+					<box>
+						<pen lineStyle="Double"/>
+						<topPen lineStyle="Double"/>
+						<leftPen lineStyle="Double"/>
+						<bottomPen lineWidth="2.0" lineStyle="Double"/>
+						<rightPen lineStyle="Double"/>
+					</box>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font isBold="false"/>
+					</textElement>
+					<textFieldExpression><![CDATA[""]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement x="70" y="15" width="485" height="13" uuid="4511896a-07e0-46a5-9838-c21712f3d673"/>
+					<textElement verticalAlignment="Middle">
+						<font isBold="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA["Global Media Network"]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement x="70" y="28" width="485" height="28" uuid="c9d78c8b-9d9a-40ea-acce-2d7c62fbaeef"/>
+					<box topPadding="2">
+						<pen lineStyle="Double"/>
+						<topPen lineStyle="Double"/>
+						<leftPen lineStyle="Double"/>
+						<bottomPen lineWidth="2.0" lineStyle="Double"/>
+						<rightPen lineStyle="Double"/>
+					</box>
+					<textElement verticalAlignment="Top">
+						<font size="8" isBold="false"/>
+					</textElement>
+					<textFieldExpression><![CDATA["Jl.Matraman No 39 Jakarta Timur"]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement x="0" y="60" width="555" height="15" uuid="72d88a9a-c4b2-4c05-acde-771c5bfb00d6"/>
+					<box leftPadding="5"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font isBold="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA["DETAIL TRANSAKSI"]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement x="365" y="144" width="70" height="20" uuid="d50e2e3b-185d-4755-8372-61fa2dff48a8"/>
+					<box rightPadding="5">
+						<topPen lineWidth="1.0"/>
+						<bottomPen lineWidth="1.0"/>
+						<rightPen lineWidth="1.0"/>
+					</box>
+					<textElement textAlignment="Right" verticalAlignment="Middle">
+						<font isBold="false"/>
+					</textElement>
+					<textFieldExpression><![CDATA["HASIL"]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement x="435" y="144" width="50" height="20" uuid="44f67bbf-95b9-4c93-aeef-61c6ba1e303f"/>
+					<box rightPadding="5">
+						<topPen lineWidth="1.0"/>
+						<bottomPen lineWidth="1.0"/>
+						<rightPen lineWidth="1.0"/>
+					</box>
+					<textElement textAlignment="Right" verticalAlignment="Middle">
+						<font isBold="false"/>
+					</textElement>
+					<textFieldExpression><![CDATA["%"]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement x="109" y="144" width="90" height="20" uuid="a37f906d-56af-4695-8ac0-c7c79520a6f8"/>
+					<box>
+						<topPen lineWidth="1.0"/>
+						<bottomPen lineWidth="1.0"/>
+						<rightPen lineWidth="1.0"/>
+					</box>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font isBold="false"/>
+					</textElement>
+					<textFieldExpression><![CDATA["PENYANYI"]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement x="199" y="144" width="166" height="20" uuid="b6807e00-5e61-476e-920b-f4dea8f1c926"/>
+					<box>
+						<topPen lineWidth="1.0"/>
+						<bottomPen lineWidth="1.0"/>
+						<rightPen lineWidth="1.0"/>
+					</box>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font isBold="false"/>
+					</textElement>
+					<textFieldExpression><![CDATA["JUDUL"]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement x="0" y="103" width="555" height="15" uuid="6f173369-d4d2-4da2-9bbd-4a4d4d573ba6"/>
+					<textElement verticalAlignment="Middle">
+						<font isBold="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA["KODE MITRA: " + $F{kode_mitra}]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement x="0" y="118" width="555" height="15" uuid="57866875-0d57-4461-a079-25e5431e4ab5"/>
+					<textElement verticalAlignment="Middle">
+						<font isBold="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA["NAMA MITRA: " + $F{nama}]]></textFieldExpression>
+				</textField>
+			</band>
+		</groupHeader>
+		<groupFooter>
+			<band height="69">
+				<textField pattern="#,##0">
+					<reportElement x="485" y="0" width="70" height="20" uuid="f9a4162d-f227-48c8-b3f7-401779547325"/>
+					<box rightPadding="5">
+						<leftPen lineWidth="1.0"/>
+						<bottomPen lineWidth="1.0"/>
+						<rightPen lineWidth="1.0"/>
+					</box>
+					<textElement textAlignment="Right" verticalAlignment="Middle">
+						<font isBold="false"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{pendapatan_total_shared}]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement x="0" y="0" width="365" height="20" uuid="89ebe929-03cc-43da-97f1-1f637123ace9"/>
+					<box leftPadding="2" rightPadding="0">
+						<leftPen lineWidth="1.0"/>
+						<bottomPen lineWidth="1.0"/>
+						<rightPen lineWidth="1.0"/>
+					</box>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font isBold="false"/>
+					</textElement>
+					<textFieldExpression><![CDATA["TOTAL"]]></textFieldExpression>
+				</textField>
+				<textField pattern="">
+					<reportElement x="435" y="0" width="50" height="20" uuid="4935813b-cd89-4b17-87d8-08e498af1528"/>
+					<box rightPadding="5">
+						<bottomPen lineWidth="1.0"/>
+						<rightPen lineWidth="1.0"/>
+					</box>
+					<textElement textAlignment="Right" verticalAlignment="Middle">
+						<font isBold="false"/>
+					</textElement>
+					<textFieldExpression><![CDATA[(100*$F{mitra_shared})+"%"]]></textFieldExpression>
+				</textField>
+				<textField pattern="#,##0">
+					<reportElement x="365" y="0" width="70" height="20" uuid="50391c18-7fa4-42a2-a156-22482ff9cdac"/>
+					<box rightPadding="5">
+						<bottomPen lineWidth="1.0"/>
+						<rightPen lineWidth="1.0"/>
+					</box>
+					<textElement textAlignment="Right" verticalAlignment="Middle">
+						<font isBold="false"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{pendapatan_total}]]></textFieldExpression>
+				</textField>
+			</band>
+		</groupFooter>
+	</group>
+	<group name="PROVIDER">
+		<groupExpression><![CDATA[$F{provider}]]></groupExpression>
+		<groupHeader>
+			<band height="17">
+				<textField>
+					<reportElement x="0" y="0" width="555" height="17" uuid="e3d5104c-9e8b-4f12-a15c-e9770fdfd3d8"/>
+					<box>
+						<bottomPen lineWidth="1.0"/>
+					</box>
+					<textElement verticalAlignment="Middle">
+						<font isBold="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA["PROVIDER: " + $F{provider}]]></textFieldExpression>
+				</textField>
+			</band>
+		</groupHeader>
+		<groupFooter>
+			<band height="20">
+				<textField>
+					<reportElement x="0" y="0" width="365" height="20" uuid="65c82ce2-7e6a-4286-a194-175729c26c8c"/>
+					<box leftPadding="2" rightPadding="0">
+						<leftPen lineWidth="1.0"/>
+						<bottomPen lineWidth="1.0"/>
+						<rightPen lineWidth="1.0"/>
+					</box>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font isBold="false"/>
+					</textElement>
+					<textFieldExpression><![CDATA["Jumlah"]]></textFieldExpression>
+				</textField>
+				<textField pattern="#,##0">
+					<reportElement x="485" y="0" width="70" height="20" uuid="69e17906-8f1a-4860-81de-0717697fcf40"/>
+					<box rightPadding="5">
+						<bottomPen lineWidth="1.0"/>
+						<rightPen lineWidth="1.0"/>
+					</box>
+					<textElement textAlignment="Right" verticalAlignment="Middle">
+						<font isBold="false"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$V{SUB_PENDAPATAN_SHARED}]]></textFieldExpression>
+				</textField>
+				<textField pattern="#,##0">
+					<reportElement x="365" y="0" width="70" height="20" uuid="54f5d125-1ba3-4916-9000-c542e67f55df"/>
+					<box rightPadding="5">
+						<bottomPen lineWidth="1.0"/>
+						<rightPen lineWidth="1.0"/>
+					</box>
+					<textElement textAlignment="Right" verticalAlignment="Middle">
+						<font isBold="false"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$V{SUB_PENDAPATAN}]]></textFieldExpression>
+				</textField>
+				<textField pattern="">
+					<reportElement x="435" y="0" width="50" height="20" uuid="42c82096-5ce0-42ca-969d-7805e7f9e768"/>
+					<box rightPadding="5">
+						<bottomPen lineWidth="1.0"/>
+						<rightPen lineWidth="1.0"/>
+					</box>
+					<textElement textAlignment="Right" verticalAlignment="Middle">
+						<font isBold="false"/>
+					</textElement>
+					<textFieldExpression><![CDATA[(100*$F{mitra_shared})+"%"]]></textFieldExpression>
+				</textField>
+			</band>
+		</groupFooter>
+	</group>
+	<background>
+		<band height="56" splitType="Stretch">
+			<image scaleImage="RetainShape" hAlign="Center" vAlign="Middle" onErrorType="Blank">
+				<reportElement stretchType="RelativeToBandHeight" x="20" y="3" width="50" height="50" uuid="59fe4474-2ee8-4d86-9352-fa9ea0fe08b3"/>
+				<box topPadding="2" leftPadding="2" bottomPadding="2" rightPadding="2">
+					<bottomPen lineWidth="1.0"/>
+				</box>
+				<imageExpression><![CDATA[$P{PATH}+"/resources/images/logo.png"]]></imageExpression>
+			</image>
+		</band>
+	</background>
+	<title>
+		<band splitType="Stretch"/>
+	</title>
+	<pageHeader>
+		<band splitType="Stretch"/>
+	</pageHeader>
+	<columnHeader>
+		<band splitType="Stretch"/>
+	</columnHeader>
+	<detail>
+		<band height="20" splitType="Stretch">
+			<textField pattern="#,##0">
+				<reportElement stretchType="RelativeToBandHeight" x="485" y="0" width="70" height="20" uuid="691e9376-193f-44db-a824-19a6e19d9d6c"/>
+				<box topPadding="0" rightPadding="5">
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{pendapatan_shared}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement stretchType="RelativeToBandHeight" x="0" y="0" width="33" height="20" uuid="e2d9ce55-d918-405f-98cb-3ed94dc13aba"/>
+				<box topPadding="0">
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{no}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement stretchType="RelativeToBandHeight" x="199" y="0" width="166" height="20" uuid="ff172172-5687-4ae8-8e6c-d523f171df11"/>
+				<box topPadding="0" leftPadding="5">
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement verticalAlignment="Middle">
+					<font isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{judul}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0">
+				<reportElement stretchType="RelativeToBandHeight" x="365" y="0" width="70" height="20" uuid="f913f560-8832-4035-8e07-7d643d8a4a85"/>
+				<box topPadding="0" rightPadding="5">
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{pendapatan}]]></textFieldExpression>
+			</textField>
+			<textField pattern="">
+				<reportElement stretchType="RelativeToBandHeight" x="435" y="0" width="50" height="20" uuid="f26c276d-2bfc-4456-85c5-a600ca46564a"/>
+				<box topPadding="0" rightPadding="5">
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[(100*$F{mitra_shared})+"%"]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement stretchType="RelativeToBandHeight" x="33" y="0" width="76" height="20" uuid="6ac47a76-8bcf-42ae-9164-1b2643a84702"/>
+				<box topPadding="0" leftPadding="0">
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{kode}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement stretchType="RelativeToBandHeight" x="109" y="0" width="90" height="20" uuid="abe58aef-323c-48cc-8106-da157f3e37f5"/>
+				<box topPadding="0" leftPadding="5">
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement verticalAlignment="Middle">
+					<font isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{penyanyi}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band splitType="Stretch"/>
+	</pageFooter>
+	<summary>
+		<band splitType="Stretch"/>
+	</summary>
+</jasperReport>
